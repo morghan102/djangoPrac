@@ -45,9 +45,10 @@ def index(request):
     return render(request, 'index.html', {'features': features})# context) #last param is for sending in dynamic data
 
 def counter(request):
-    text = request.POST['text'] #its getting the textarea in index.html bc its name is text and storing the text in this var. make sure the post/get matches w wats in whatever is sending to it
-    num_words = len(text.split())
-    return render(request, 'counter.html', {'num': num_words})
+    # text = request.POST['text'] #its getting the textarea in index.html bc its name is text and storing the text in this var. make sure the post/get matches w wats in whatever is sending to it
+    # num_words = len(text.split())
+    posts = [1,2,3,4,5,'tim', 'may', 'kool']
+    return render(request, 'counter.html', {'posts': posts})
 
 def register(request):
     if request.method == 'POST':
@@ -72,6 +73,7 @@ def register(request):
             return redirect('register')
     else:
         return render(request, 'register.html')
+        
 
 def login(request):
     if request.method == 'POST':
@@ -92,5 +94,5 @@ def logout(req):
     auth.logout(req)
     return redirect('/')
 
-    #save to the db
-    return render(request, 'register.html')
+def post(req, pk):
+    return render(req, 'post.html', {'pk':pk})
